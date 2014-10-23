@@ -53,7 +53,7 @@ class candidate :
 #their assigned number and creates a list of ballots
 
 def election_set(r):
-  
+    
   return {}, []
 
 #------------
@@ -63,7 +63,11 @@ def election_set(r):
 #tied candidates
 
 def election_solve(r,w):
+  humElections = int(r.readline()
+  r.readline()
   
+  while(numElections > 0):
+    print('poop')
   w.write('')
 
   
