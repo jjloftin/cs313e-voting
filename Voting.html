@@ -1,0 +1,103 @@
+wrote Voting.html
+LIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module Voting</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Voting</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/v/filer4b/v35q001/jjloftin/cs313e-voting/Voting.py">/v/filer4b/v35q001/jjloftin/cs313e-voting/Voting.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;---------------------------<br>
+#&nbsp;Voting.py<br>
+#&nbsp;Copyright&nbsp;(C)&nbsp;2014<br>
+#&nbsp;John&nbsp;Loftin<br>
+#&nbsp;---------------------------</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="Voting.html#ballot">ballot</a>
+</font></dt><dt><font face="helvetica, arial"><a href="Voting.html#candidate">candidate</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ballot">class <strong>ballot</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Ballot&nbsp;class.&nbsp;Holds&nbsp;the&nbsp;preferences&nbsp;of&nbsp;each&nbsp;voter.&nbsp;Can&nbsp;be&nbsp;altered&nbsp;to&nbsp;remove&nbsp;losing&nbsp;candidates&nbsp;by&nbsp;changing&nbsp;index&nbsp;of&nbsp;<a href="#ballot">ballot</a>&nbsp;(initially&nbsp;set&nbsp;to&nbsp;0)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ballot-__init__"><strong>__init__</strong></a>(self, list<font color="#909090">=[0]</font>)</dt><dd><tt>Construct&nbsp;a&nbsp;new&nbsp;<a href="#ballot">ballot</a>.<br>
+Data&nbsp;members&nbsp;-&nbsp;votes(list),&nbsp;index(int)</tt></dd></dl>
+
+<dl><dt><a name="ballot-__str__"><strong>__str__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;string&nbsp;of&nbsp;<a href="#ballot">ballot</a>&nbsp;-&nbsp;just&nbsp;a&nbsp;string&nbsp;version&nbsp;of&nbsp;the&nbsp;list&nbsp;of&nbsp;votes</tt></dd></dl>
+
+<dl><dt><a name="ballot-index_up"><strong>index_up</strong></a>(self)</dt><dd><tt>Move&nbsp;index&nbsp;up&nbsp;by&nbsp;one.&nbsp;Changes&nbsp;who&nbsp;<a href="#candidate">candidate</a>&nbsp;is&nbsp;voting&nbsp;for</tt></dd></dl>
+
+<dl><dt><a name="ballot-vote"><strong>vote</strong></a>(self)</dt><dd><tt>Returns&nbsp;who&nbsp;voter&nbsp;is&nbsp;voting&nbsp;for&nbsp;as&nbsp;an&nbsp;index.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="candidate">class <strong>candidate</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Candidate&nbsp;class.&nbsp;Contains&nbsp;a&nbsp;name,&nbsp;number&nbsp;of&nbsp;votes,&nbsp;and&nbsp;a&nbsp;list&nbsp;of&nbsp;sthe&nbsp;ballots&nbsp;of&nbsp;people&nbsp;voting&nbsp;for<br>
+them<br>
+Data&nbsp;members&nbsp;-&nbsp;name(can&nbsp;take&nbsp;in&nbsp;anything,&nbsp;will&nbsp;always&nbsp;output&nbsp;a&nbsp;string),&nbsp;votes(int),&nbsp;ballots(list&nbsp;-&nbsp;instances&nbsp;of&nbsp;<a href="#ballot">ballot</a>)s<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="candidate-__init__"><strong>__init__</strong></a>(self, name, votes<font color="#909090">=0</font>)</dt><dd><tt>Construct&nbsp;a&nbsp;new&nbsp;<a href="#candidate">candidate</a></tt></dd></dl>
+
+<dl><dt><a name="candidate-__str__"><strong>__str__</strong></a>(self)</dt><dd><tt>Returns&nbsp;String&nbsp;of&nbsp;Candidate&nbsp;-&nbsp;Candidate&nbsp;Name.</tt></dd></dl>
+
+<dl><dt><a name="candidate-add_ballot"><strong>add_ballot</strong></a>(self, ballot)</dt><dd><tt>Add&nbsp;a&nbsp;new&nbsp;<a href="#ballot">ballot</a>&nbsp;to&nbsp;<a href="#candidate">candidate</a>.&nbsp;Increases&nbsp;total&nbsp;votes&nbsp;by&nbsp;1</tt></dd></dl>
+
+<dl><dt><a name="candidate-ballot_list"><strong>ballot_list</strong></a>(self)</dt><dd><tt>Return&nbsp;list&nbsp;of&nbsp;ballots&nbsp;attached&nbsp;to&nbsp;each&nbsp;<a href="#candidate">candidate</a></tt></dd></dl>
+
+<dl><dt><a name="candidate-vote_tot"><strong>vote_tot</strong></a>(self)</dt><dd><tt>return&nbsp;number&nbsp;of&nbsp;votes</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-election_set"><strong>election_set</strong></a>(r)</dt><dd><tt>Reads&nbsp;in&nbsp;from&nbsp;reader&nbsp;(r)&nbsp;to&nbsp;set&nbsp;up&nbsp;the&nbsp;parameters&nbsp;of&nbsp;the&nbsp;election.&nbsp;Creates&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;candidates&nbsp;without&nbsp;ballots&nbsp;and<br>
+their&nbsp;assigned&nbsp;number&nbsp;and&nbsp;creates&nbsp;a&nbsp;list&nbsp;of&nbsp;ballots</tt></dd></dl>
+ <dl><dt><a name="-election_solve"><strong>election_solve</strong></a>(r, w)</dt><dd><tt>Run&nbsp;an&nbsp;austrlian&nbsp;style&nbsp;election.&nbsp;Reads&nbsp;in&nbsp;input&nbsp;from&nbsp;a&nbsp;reader(r)&nbsp;and&nbsp;writes&nbsp;to&nbsp;writer&nbsp;(w)&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;winning&nbsp;<a href="#candidate">candidate</a>&nbsp;or&nbsp;<br>
+tied&nbsp;candidates</tt></dd></dl>
+</td></tr></table>
+</body></html>

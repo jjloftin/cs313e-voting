@@ -1,75 +1,93 @@
-#VotingPy#
+#!/usr/bin/env python3
+
+# ---------------------------
+# Voting.py
+# Copyright (C) 2014
+# John Loftin
+# ---------------------------
+
 #-------------
 #Ballot(Class)
 #-------------
-#ballot class. Holds the preferences of each voter. Can be altered to remove losing 
-#candidates
+
 class ballot :
+  """
+  Ballot class. Holds the preferences of each voter. Can be altered to remove losing candidates by changing index of ballot (initially set to 0)
+  """
   def __init__(self, list =[0]):
+    """
+    Construct a new ballot.
+    Data members - votes(list), index(int)
+    """
     self.votes = list
     self.index = 0
-    
-  #allows index to be moved up by one
   def index_up(self):
-    assert self.index < len(self.votes) - 1
+    """
+    Move index up by one. Changes who candidate is voting for
+    """
     self.index += 1
-  
   def vote(self):
+    """
+    Returns who voter is voting for as an index.
+    """
     return self.votes[self.index]
-    
-  def index(self):
-    return self.index
-    
   def __str__(self):    
+    """
+    Return a string of ballot - just a string version of the list of votes
+    """   
     return str(self.votes)
-    
-  def __eq__ (self, other):
-    return self.votes == other.votes
 
 #----------------
 #Candidate(Class)
 #----------------
-#candidate contains a name, number of votes, and the ballots of people voting for
-#them
+
 class candidate :
+  """
+  Candidate class. Contains a name, number of votes, and a list of sthe ballots of people voting for
+  them
+  Data members - name(can take in anything, will always output a string), votes(int), ballots(list - instances of ballot)s
+  """
   def __init__(self, name, votes = 0):
+    """
+    Construct a new candidate
+    """
     self.name = name
     self.votes = votes
     self.ballots = [] 
     
   def vote_tot(self):
+    """
+    return number of votes
+    """
     return self.votes
     
   def ballot_list(self):
+    """
+    Return list of ballots attached to each candidate
+    """  
     return self.ballots
     
   def add_ballot(self,ballot):
+    """
+    Add a new ballot to candidate. Increases total votes by 1
+    """
     type(ballot) is ballot
     self.votes += 1
     self.ballots.append(ballot)
     
   def __str__(self):
+    """
+    Returns String of Candidate - Candidate Name.
+    """
     return str(self.name)
-    
-  def __eq__(self,other):
-    type(other) is candidate
-    
-    if(self.name != other.name):
-      return False
-    for ballot in self.ballot_list():
-      if not(ballot in other.ballot_list()):
-        return False
-    for ballot in other.ballot_list():
-      if not(ballot in self.ballot_list()):
-        return False
-    return True
 #-------------
 #election_set
 #-------------
-#Sets up the parameters of the election. Creates a dictionary of candidates without ballots and
-#their assigned number and creates a list of ballots
-
 def election_set(r):
+  """
+  Reads in from reader (r) to set up the parameters of the election. Creates a dictionary of candidates without ballots and
+  their assigned number and creates a list of ballots
+  """
   numCandidates = int(r.readline())
   candidate_dict = {}
   all_ballots = []
@@ -95,10 +113,13 @@ def election_set(r):
 #------------
 #election_run
 #------------
-#Run an austrlian style election returns the name of the winning candidate or 
-#tied candidates
+
 
 def election_solve(r,w):
+  """
+  Run an austrlian style election. Reads in input from a reader(r) and writes to writer (w) the name of the winning candidate or 
+  tied candidates
+  """
   num_elections = int(r.readline())
   r.readline()
   j = 0

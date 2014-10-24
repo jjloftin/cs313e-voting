@@ -14,50 +14,88 @@ class VotingTests(TestCase):
   def test_ballot1(self):
     a = ballot([1,2,3])
     assert str(a) == str([1,2,3])
-   
   def test_ballot2(self):
+    a = ballot([1])
+    assert str(a) == str([1])
+  def test_ballot3(self):
+    a = ballot([])
+    assert str(a) == str([])
+    
+  def test_ballot4(self):
     a = ballot([1,2,3,4,5,6])
     a.index_up()
- 
     assert a.vote() == 2
+  def test_ballot5(self):
+    a = ballot([1,2,3])
+    a.index_up()
+    a.index_up()
+    assert a.vote() == 3
+  def tests_ballot6(self):
+    a = ballot()
+    assert a.vote() == 0 
     
-  def test_ballot3(self):
+  def test_ballot7(self):
     a = ballot([1,2,3,4,5,6])
-    a.set_index(5)
-   
-    assert a.vote() == 6
-  
+    a.index_up()
+    assert a.index == 1
+  def test_ballot8(self):
+    a = ballot([1,2,3])
+    a.index_up()
+    a.index_up()
+    assert a.index == 2
+  def tests_ballot9(self):
+    a = ballot([1,2,3,4,5,6])
+    a.index_up()
+    a.index_up()
+    a.index_up()
+    a.index_up()
+    assert a.index == 4
+    
   #---------
   #candidate  
   #---------
   def test_candidate1(self):
     a = candidate('Adam')
     a.add_ballot(ballot())
-      
-    assert(a.vote_tot() == 1)
-      
+    assert(a.vote_tot() == 1)    
   def test_candidate2(self):
     a = candidate('Branfordington')
     a.add_ballot(ballot())
     a.add_ballot(ballot())
     a.add_ballot(ballot()) 
-    
-    assert(a.vote_tot() == 3)    
-  
+    assert(a.vote_tot() == 3)
   def test_candidate3(self):
+    a = candidate('Snoopy')
+    assert(a.vote_tot() == 0)    
+  
+  def test_candidate4(self):
     a= candidate('Bashmanogan')
     assert(str(a) == 'Bashmanogan')
+  def test_candidate5(self):
+    a = candidate(9)
+    assert(str(a) == '9')
+  def test_candidate6(self):
+    a = candidate([])
+    assert(str(a) == '[]')
     
-  def test_candidates4(self):
-    a = candidate('Lando Calrissian')
+  def test_candidate7(self):
+    a = candidate('Lando Calrissiam')
     b = ballot([1])
-    
     for i in range(5):
       a.add_ballot(b)
-
     for item in a.ballot_list():
       assert str(item) == str([1])
-  
+  def test_candidate8(self):  
+    a = candidate('m')
+    b = [ballot([1,2,3]),ballot([2,1,3]),ballot([2,1,4])]
+    for i in range(3):
+      a.add_ballot(b[i])
+    for i in range(len(a.ballot_list())):
+      assert str(b[i]) == str(a.ballot_list()[i])
+  def test_candidate9(self):
+    a = candidate('Lock')
+    str(a.ballot_list()) == str([])   
+    
   #---
   #set
   #---  
@@ -65,16 +103,18 @@ class VotingTests(TestCase):
     r = StringIO('3\nJohn Doe \n Jane Smith \n Sirhan Sirhan \n 1 2 3 \n 1 2 3 \n 2 1 3\n 2 3 1 \n 1 2 3 \n 3 1 2') 
     dict, lst = election_set(r)
     
-    assert {1:candidate('John Doe'), 2: candidate('Jane Smith'), 3: candidate('Sirhan Sirhan')} == dict
+    assert(str(dict[1]) == 'John Doe')
+    assert(str(dict[2]) == 'Jane Smith')
+    assert(str(dict[3]) == 'Sirhan Sirhan')
     
   def test_election_set2(self):
     r = StringIO('3\nJohn Doe\nJane Smith\nSirhan Sirhan\n1 2 3\n1 2 3\n2 1 3 \n 2 3 1\n 1 2 3 \n 3 1 2') 
     dict, lst =  election_set(r)
-    
     a = zip(lst,[[1,2,3], [1,2,3], [2,1,3], [2,3,1], [1,2,3], [3,1,2]])
     for u, v in a:
       assert(str(u) == str(v))
     assert True
+    
   def test_election_set3(self):
     r = StringIO('1\nLando PandaBears\n1\n1\n1\n1')
     dict, lst = election_set(r)
@@ -86,7 +126,7 @@ class VotingTests(TestCase):
     r = StringIO('1\nLando PandaBears\n1\n1\n1\n1')
     dict,lst = election_set(r)
     
-    assert {1: candidate('Lando PandaBears')} == dict 
+    assert 'Lando PandaBears' == str(dict[1]) 
     
    #-----
    #Solve
