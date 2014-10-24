@@ -24,7 +24,7 @@ class ballot :
   def __str__(self):    
     return str(self.votes)
   def __eq__ (self, other):
-    return self.list == other.list
+    return self.votes == other.votes
 
 #----------------
 #Candidate(Class)
@@ -65,7 +65,6 @@ class candidate :
 
 def election_set(r):
   numCandidates = int(r.readline())
- 
   candidate_dict = {}
   all_ballots = []
   for i in range(1,numCandidates + 1):
@@ -73,6 +72,7 @@ def election_set(r):
   
   while True:
     s = r.readline().strip()
+    
     if not s:
       break
     else:
@@ -94,18 +94,24 @@ def election_set(r):
 
 def election_solve(r,w):
   num_elections = int(r.readline())
+  r.readline()
   j = 0
   
-  #run the elections
   while(j < num_elections):
-    r.readline()
     if(j != 0):
-      w.write('\n')  
+      w.write('\n\n')
     j += 1
     
     candidate_dict, all_ballots = election_set(r)
     #run the election according to Australian Voting rules
     #count the initial votes
+    
+    
+    if(len(candidate_dict)) == 1:
+      w.write(str(candidate_dict[1]))
+     
+      continue
+    
     num_votes = len(all_ballots)
     
     for ballot in all_ballots:
@@ -113,7 +119,7 @@ def election_solve(r,w):
       candidate_dict[vote].add_ballot(ballot)
 
     
-    #keep track of eliminated candidates    
+    #keep track of eliminateted candidates    
     loser_overall = []
     k = 0
     while True:
@@ -121,15 +127,13 @@ def election_solve(r,w):
       winner = None
       min = num_votes + 1
       loser = []
-   
+      
       for i in range(1,len(candidate_dict) + 1):
         #ignore eliminated candidates
         if i in loser_overall:
           continue
         candidate = candidate_dict[i]
-
         votes = candidate.vote_tot()
-
         assert type(votes) is int
         
         if(votes > max):
@@ -145,12 +149,13 @@ def election_solve(r,w):
         loser.append(winner)        
       #detrmine if winner 
       if(max / num_votes > 0.5):
-        w.write(str(winner) + '\n')    
+        w.write(str(winner))    
         break
       #determine if a tie
       if len(loser) == len(candidate_dict) - len(loser_overall):
-        for candidate in loser:
-          w.write(str(candidate) + '\n')
+        for i in candidate_dict:
+          if(candidate_dict[i] in loser):
+            w.write(str(candidate_dict[i]) + '\n')
         break
       #if not a tie reassign the votes of the losing candidates
       for i in candidate_dict:
@@ -166,8 +171,7 @@ def election_solve(r,w):
             ballot.index_up()     
           candidate_dict[ballot.vote()].add_ballot(ballot)      
       
-      for i in candidate_dict:
-        print(candidate_dict[i].vote_tot())
+    
       
         
   

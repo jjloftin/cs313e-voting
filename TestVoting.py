@@ -68,18 +68,22 @@ class VotingTests(TestCase):
     assert {1:candidate('John Doe'), 2: candidate('Jane Smith'), 3: candidate('Sirhan Sirhan')} == dict
     
   def test_election_set2(self):
-    r = StringIO('1\n\n3\nJohn Doe\nJane Smith\nSirhan Sirhan\n1 2 3\n1 2 3\n2 1 3 \n 2 3 1\n 1 2 3 \n 3 1 2') 
+    r = StringIO('3\nJohn Doe\nJane Smith\nSirhan Sirhan\n1 2 3\n1 2 3\n2 1 3 \n 2 3 1\n 1 2 3 \n 3 1 2') 
     dict, lst =  election_set(r)
     
-    assert [[1,2,3], [1,2,3], [2,1,3], [2,3,1], [1,2,3], [3,1,2]] == lst
+    a = zip(lst,[[1,2,3], [1,2,3], [2,1,3], [2,3,1], [1,2,3], [3,1,2]])
+    for u, v in a:
+      assert(str(u) == str(v))
+    assert True
   def test_election_set3(self):
-
+    r = StringIO('1\nLando PandaBears\n1\n1\n1\n1')
     dict, lst = election_set(r)
-    
-    assert [[1],[1],[1],[1]] == lst 
+    for object in lst:
+      assert str(object) == str([1])
+    assert True
     
   def test_election_set4(self):
-    r = StringIO('1\n\n1\nLando PandaBears\n1\n1\n1\n1')
+    r = StringIO('1\nLando PandaBears\n1\n1\n1\n1')
     dict,lst = election_set(r)
     
     assert {1: candidate('Lando PandaBears')} == dict 
@@ -90,17 +94,17 @@ class VotingTests(TestCase):
   def test_electiion_aolve1(self):
     r = StringIO('1\n\n1\nLando PandaBears\n1\n1\n1\n1')
     w = StringIO()
+    election_solve(r,w)
     
     assert w.getvalue() == 'Lando PandaBears'
   def test_election_solve2(self):
-    r = StringIO('1\n\n3\nJohn Doe \n Jane Smith \n Sirhan Sirhan \n 1 2 3 \n 1 2 3 \n 2 1 3\n 2 3 1 \n 1 2 3 \n 3 1 2')
+    r = StringIO('1\n\n3\nJohn Doe\nJane\nSirhan\n1 2 3\n 2 1 3\n 2 3 1\n 1 2 3\n 3 1 2\n')
     w = StringIO()
+    election_solve(r,w)
     
     assert w.getvalue() == 'John Doe'
-  
   def test_election_solve3(self):
-    r = StringIO('2\n\n3\nJohn Doe \n Jane Smith \n Sirhan Sirhan \n 1 2 3 \n 1 2 3 \n 2 1 3\n 2 3 1 \n 1 2 3 \n 3 1 2\n\n1\nLando PandaBears\n1\n1\n1\n1')
-    w = StringIO()
+s
     
     assert w.getvalue() == 'John Doe\n\nLando PandaBears'
     
