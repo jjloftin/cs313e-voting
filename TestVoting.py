@@ -104,7 +104,10 @@ class VotingTests(TestCase):
     
     assert w.getvalue() == 'John Doe'
   def test_election_solve3(self):
-s
+    r = StringIO('2\n\n3\nJohn Doe\nJane\nSirhan\n1 2 3\n 2 1 3\n 2 3 1\n 1 2 3\n 3 1 2\n\n1\nLando PandaBears\n1\n1\n1\n1')
+    w = StringIO()
+   
+    election_solve(r,w)
     
     assert w.getvalue() == 'John Doe\n\nLando PandaBears'
     
